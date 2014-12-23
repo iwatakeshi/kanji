@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    block content
+    script(src='/javascripts/kanji.js')
+    script(src='/javascripts/kanji.grade.first.js')
+    script.
+      var k = kanji();
+        console.log(k.grade());
