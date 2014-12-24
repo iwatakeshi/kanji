@@ -68,14 +68,14 @@ to your index.html file.
 Docs will be updated once kanji has been completed
 
 
-Start project and find Kanji by meaning:
+**Start project and find Kanji by meaning:**
 
 ![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-npm.gif)
 
-Change locale and find Kanji by meaning:
+**Change locale and find Kanji by meaning:**
 
 ![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-locale.gif)
 
-Find Kanji by Kun-yomi
+**Find Kanji by Kun-yomi**
 
 ![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-kunyomi.gif)
