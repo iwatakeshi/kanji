@@ -18,12 +18,14 @@ The benefits of using this:
 	* findByOnyomi (note all on-yomi must be Katakana)
 	* findByKunYomi (note all kun-yomi must be Hiragana)
 * should work with node.js (currently working in browser)
+* locale support (search kanji in your locale)
 
 ###Usage
 
 ```html
 	<script type="text/javascript" src="kanji.js"></script>
 	<script type="text/javascript" src="kanji.grade.first.js"></script>
+	<script type="text/javascript" src="kanji.locale.es.js"></script>
 	<script type="text/javascript">
 		var k = kanji();
 		k.findByMeaning('round');
@@ -59,5 +61,8 @@ npm start
 3. Play with kanji!
 
 To develop, the files will be located under `./public/javascripts`
+
+If you don't want to use or have node.js then go the located directory and import them
+to your index.html file.
 
 Docs will be updated once kanji has been completed

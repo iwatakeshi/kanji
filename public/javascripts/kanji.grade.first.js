@@ -1,6 +1,9 @@
 // kanji.js kanji configuration
 // grade: first
-// author : Werner Mollentze : https://github.com/wernerm
+// author: Takeshi Iwana
+// All Kanji are ordered by number of strokes
+// Kanji and examples are from: Shogakusei no Shin Reinbo- Kanji Yomi Kaki Jiten
+// Amazon URL: http://goo.gl/7qwaMY
 /*jslint node: true, forin: true, white: true, newcap: true*/
 /*jslint browser:true */
 /*global define*/
@@ -9,14 +12,12 @@
     if (typeof define === 'function' && define.amd) {
         define(['kanji'], factory); // AMD
     } else if (typeof exports === 'object') {
-        module.exports = factory(require('.kanji')); // Node
+        module.exports = factory(require('./kanji')); // Node
     } else {
         factory((typeof global !== 'undefined' ? global : this).kanji); // node or other global
     }
 }(function(kanji) {
     return kanji.defineKanji('first', {
-        //kanji are ordered by the number of strokes.
-        //The source of these come from Rainbow Kaji Jishou
         "kanji": [{
             character: "一",
             romaji: "ichi",

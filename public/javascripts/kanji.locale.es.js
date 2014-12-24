@@ -1,4 +1,4 @@
-// kanji.js kanji configuration
+// kanji.js locale configuration
 // grade: second
 // author: Takeshi Iwana
 // All Kanji are ordered by number of strokes
@@ -17,18 +17,25 @@
         factory((typeof global !== 'undefined' ? global : this).kanji); // node or other global
     }
 }(function(kanji) {
-    return kanji.defineKanji('second', {
-        "kanji": [{
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
-            example: [{
-                ex: "",
-                ruby: [""]
-            }]
+    return kanji.defineLocale('es', {
+        "grade": {
+            "first": [{
+                character: "一",
+                meaning: ["uno"]
+            }, {
+                character: "右",
+                meaning: ["derecho"]
 
-        }]
+            }, {
+                character: "雨",
+                meaning: ['lluvia']
+            }, {
+                character: "円",
+                meaning: ["redondo", "yen", "círculo"]
+            }, {
+                character: "王",
+                meaning: ["rey", "monarca", "soberano", "potentado"]
+            }]
+        }
     });
 }));
