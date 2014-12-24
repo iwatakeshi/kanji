@@ -70,12 +70,12 @@ Docs will be updated once kanji has been completed
 
 Start project and find Kanji by meaning:
 
-![](https://github.com/iwatakeshi/kanji/master/gifs/kanji-npm.gif)
+![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-npm.gif)
 
 Change locale and find Kanji by meaning:
 
-![](https://github.com/iwatakeshi/kanji/master/gifs/kanji-locale.gif)
+![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-locale.gif)
 
 Find Kanji by Kun-yomi
 
-![](https://github.com/iwatakeshi/kanji/master/gifs/kanji-kunyomi.gif)
+![](https://github.com/iwatakeshi/kanji/blob/master/gifs/kanji-kunyomi.gif)
