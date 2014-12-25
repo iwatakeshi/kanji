@@ -167,7 +167,7 @@
                             require(path.resolve(file));
                         }
 
-                        console.log("%s (%s)", file, path.extname(file));
+                        //console.log("%s (%s)", file, path.extname(file));
                     });
                 }
 
