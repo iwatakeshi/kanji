@@ -52,8 +52,16 @@
         return typeof value == 'function' && reNative.test(value);
     }
 
+    function isObjectLike(value) {
+        return (value && typeof value == 'object') || false;
+    }
+
     function isObject(value) {
         return !!(value && objectTypes[typeof value]);
+    }
+
+    function isString(value) {
+        return typeof value == 'string' || (isObjectLike(value) && toString.call(value) == stringClass) || false;
     }
 
     function isNumber(value) {
@@ -72,7 +80,7 @@
 
     //really basic
     function isPlainObject(value) {
-        return Object.prototype.toString.call(value) === "[object Object]";
+        return Object.prototype.toString.call(value) === objectClass;
     }
 
     function each(collection, callback) {
@@ -125,7 +133,7 @@
         hasModule = (typeof module !== 'undefined' && module.exports);
 
     /** kanji Helpers */
-    function replaceMeaning() {
+    function replaceMeanings() {
         if (locales[global.locale]) {
             _.each(dictionary, function(g, gvalue) {
                 if (global.grade !== '*') {
@@ -135,18 +143,38 @@
                             if (locales[global.locale]) {
                                 if (locales[global.locale].grade[g]) {
                                     _.each(locales[global.locale].grade[g], function(kl) {
-                                        k.meaning = kl.meaning;
+                                        if (k.character === kl.character) {
+                                            k.meaning = kl.meaning;
+                                        }
                                     });
                                 }
 
                             }
                         }
                     });
+                } else {
+                    //for each grade of type array
+                    _.each(gvalue, function(k) {
+                        if (locales[global.locale]) {
+                            if (locales[global.locale].grade[g]) {
+                                _.each(locales[global.locale].grade[g], function(kl) {
+                                    if (k.character === kl.character) {
+                                        k.meaning = kl.meaning;
+                                    }
+                                });
+                            }
+
+                        }
+
+                    });
                 }
             });
         }
     }
 
+    /** 
+     * Automatically loads the grades and locales
+     */
     function loadModules() {
         if (hasModule) {
             var fs = require("fs"),
@@ -162,11 +190,9 @@
                     }).filter(function(file) {
                         return fs.statSync(file).isFile();
                     }).forEach(function(file) {
-                        //console.log(file);
                         if (file.match(/locale/) || file.match(/grade/)) {
                             require(path.resolve(file));
                         }
-
                         //console.log("%s (%s)", file, path.extname(file));
                     });
                 }
@@ -189,21 +215,20 @@
      * @return {Array} grade
      */
     Kanji.prototype.grade = function(grade) {
-        if (typeof grade === Number) {
+        if (isNumber(grade)) {
             global.grade = grades[grade - 1];
         }
 
-        if (typeof grade === String) {
-            global.grade = (grade !== '*' ? grade : global.grade);
+        if (isString(grade)) {
+            global.grade = grade;
         }
 
-        replaceMeaning();
-        if(global.grade !== '*'){
+        if (global.grade !== '*') {
             return dictionary[global.grade];
-        }else{
-            return new Error('Use grades() function instead.');
+        } else {
+            return this.grades();
         }
-        
+
     };
 
     /**
@@ -211,18 +236,18 @@
      * @return {Array} dictionary
      */
     Kanji.prototype.grades = function() {
-        replaceMeaning();
         return dictionary;
     };
 
     /** Sets the locale */
     Kanji.prototype.locale = function(locale) {
-        global.locale = locale;
+        global.locale = (locale !== undefined && isString(locale)) ? locale : 'en';
+        replaceMeanings();
     };
 
     /**
      * Searches the kanji by meaning
-     * @param  {String} meaning [English]
+     * @param  {String} meaning
      * @return {Array} result
      */
     Kanji.prototype.findByMeaning = function(meaning) {
@@ -231,62 +256,23 @@
         if (global.grade !== '*') {
             //loop through dictionary by grade
             _.each(dictionary[global.grade], function(k) {
-                //check if the locale exists
-                if (locales[global.locale]) {
-                    //check if the grade for that locale exists
-                    if (locales[global.locale].grade[global.grade]) {
-                        //for each kanji in the grade
-                        _.each(locales[global.locale].grade[global.grade], function(kl) {
-                            //compare the character
-                            if (k.character === kl.character) {
-                                //when found, compare the meanings
-                                _.each(kl.meaning, function(ml) {
-                                    //if found
-                                    if (ml === meaning) {
-                                        //replace the default english meaning with
-                                        //with the translated
-                                        k.meaning = kl.meaning;
-                                        //store
-                                        result.push(k);
-                                    }
-                                });
-                            }
-                        });
+                _.each(k.meaning, function(m) {
+                    if (m === meaning) {
+                        result.push(k);
                     }
-                } else {
-                    _.each(k.meaning, function(m) {
-                        if (m === meaning) {
-                            result.push(k);
-                        }
-                    });
-                }
+                });
 
             });
 
         } else {
             _.each(dictionary, function(g, gvalue) {
                 _.each(gvalue, function(k) {
+                    _.each(k.meaning, function(m) {
+                        if (m === meaning) {
+                            result.push(k);
+                        }
+                    });
 
-                    if (locales[global.locale]) {
-                        _.each(locales[global.locale].grade, function(gl, glvalue) {
-                            _.each(glvalue, function(kl) {
-                                if (k.character === kl.character) {
-                                    _.each(kl.meaning, function(ml) {
-                                        if (ml === meaning) {
-                                            k.meaning = kl.meaning;
-                                            result.push(k);
-                                        }
-                                    })
-                                }
-                            });
-                        });
-                    } else {
-                        _.each(k.meaning, function(m) {
-                            if (m === meaning) {
-                                result.push(k);
-                            }
-                        });
-                    }
                 });
             });
         }
@@ -295,64 +281,38 @@
 
     /**
      * Searches the kanji by meaning asychronously
-     * @param  {String} meaning [English]
-     * @return {Array} result
+     * @param  {String} meaning
+     * @param {Function} callback
      */
     Kanji.prototype.findByMeaningAsync = function(meaning, callback) {
-        var result = [];
         //check if the user wamts to search through all
         if (global.grade !== '*') {
             //loop through dictionary by grade
             _.each(dictionary[global.grade], function(k) {
-                //check if the locale exists
-                if (locales[global.locale]) {
-                    //check if the grade for that locale exists
-                    if (locales[global.locale].grade[global.grade]) {
-                        //for each kanji in the grade
-                        _.each(locales[global.locale].grade[global.grade], function(kl) {
-                            //compare the character
-                            if (k.character === kl.character) {
-                                //when found, compare the meanings
-                                _.each(kl.meaning, function(ml) {
-                                    //if found
-                                    if (ml === meaning) {
-                                        //replace the default english meaning with
-                                        //with the translated
-                                        k.meaning = kl.meaning;
-                                        //store
-                                        callback(k);
-                                    }
-                                });
-                            }
-                        });
+                _.each(k.meaning, function(m) {
+                    if (m === meaning) {
+                        callback(k);
                     }
-                } else {
-                    _.each(k.meaning, function(m) {
-                        if (m === meaning) {
-                            callback(k)
-                        }
-                    });
-                }
-
+                });
             });
 
         } else {
-            _.each(dictionary, function(g) {
-                _.each(g, function(k) {
+            _.each(dictionary, function(g, gvalue) {
+                _.each(gvalue, function(k) {
                     _.each(k.meaning, function(m) {
                         if (m === meaning) {
-                            callback(k);
+                            result.push(k);
                         }
                     });
+
                 });
             });
         }
-        return result;
     };
 
     /**
      * Searches the kanji by romaji
-     * @param  {String} meaning [English]
+     * @param  {String} romaji
      * @return {Array} result
      */
     Kanji.prototype.findByRomaji = function(romaji) {
@@ -376,8 +336,31 @@
     };
 
     /**
+     * Searches the kanji by romaji asynchronously
+     * @param  {String} romaji
+     * @param {Function} callback
+     */
+    Kanji.prototype.findByRomajiAsync = function(romaji, callback) {
+        if (global.grade !== '*') {
+            _.each(dictionary[global.grade], function(k) {
+                if (k.romaji === romaji) {
+                    callback(k);
+                }
+            });
+        } else {
+            _.each(dictionary, function(g) {
+                _.each(g, function(k) {
+                    if (k.romaji === romaji) {
+                        callback(k);
+                    }
+                });
+            });
+        }
+    };
+
+    /**
      * Searches the kanji by on-yomi
-     * @param  {String} meaning [English]
+     * @param  {String} onyomi
      * @return {Array} result
      */
     Kanji.prototype.findByOnyomi = function(onyomi) {
@@ -411,8 +394,42 @@
     };
 
     /**
+     * Searches the kanji by on-yomi
+     * @param  {String} onyomi
+     * @param {Function} callback
+     */
+    Kanji.prototype.findByOnyomiAsync = function(onyomi, callback) {
+        if (global.grade !== '*') {
+            _.each(dictionary[global.grade], function(k) {
+                _.each(k.onyomi, function(o) {
+                    if (o) {
+                        if (o === onyomi) {
+                            callback(k);
+                        }
+                    }
+
+                });
+            });
+
+        } else {
+            _.each(dictionary, function(g) {
+                _.each(g, function(k) {
+                    _.each(k.onyomi, function(m) {
+                        if (o) {
+                            if (o === onyomi) {
+                                callback(k);
+                            }
+                        }
+                    });
+                });
+            });
+        }
+        return result;
+    };
+
+    /**
      * Searches the kanji by kunyomi
-     * @param  {String} meaning [English]
+     * @param  {String} meaning
      * @return {Array} result
      */
     Kanji.prototype.findByKunyomi = function(kunyomi) {
@@ -445,13 +462,44 @@
         return result;
     };
 
+    /**
+     * Searches the kanji by kunyomi asynchronously
+     * @param  {String} meaning
+     * @param  {Function} callback
+     */
+    Kanji.prototype.findByKunyomiAsync = function(kunyomi, callback) {
+
+        if (global.grade !== '*') {
+            _.each(dictionary[global.grade], function(k) {
+                _.each(k.kunyomi, function(o) {
+                    if (o) {
+                        if (o === kunyomi) {
+                            callback(k);
+                        }
+                    }
+
+                });
+            });
+
+        } else {
+            _.each(dictionary, function(g) {
+                _.each(g, function(k) {
+                    _.each(k.kunyomi, function(m) {
+                        if (o) {
+                            if (o === kunyomi) {
+                                callback(k);
+                            }
+                        }
+                    });
+                });
+            });
+        }
+    };
+
     kanji = function() {
         return new Kanji();
     };
 
-    /*
-      Static methods
-    */
     kanji.findByMeaning = function(collection, meaning) {
         var result;
         _.each(collection, function(k) {

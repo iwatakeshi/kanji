@@ -22,23 +22,18 @@
             "first": [{
                 character: "一",
                 meaning: ["one"]
-
             }, {
                 character: "右",
                 meaning: ["right"]
-
             }, {
                 character: "雨",
                 meaning: ["rain"]
-
             }, {
                 character: "円",
                 meaning: ["round", "yen", "circle"]
-
             }, {
                 character: "王",
                 meaning: ["king", "monarch", "sovereign", "potentate"]
-
             }]
         }
     });
