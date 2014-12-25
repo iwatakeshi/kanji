@@ -149,7 +149,6 @@
 
     function loadModules() {
         if (hasModule) {
-            console.log('HERE');
             var fs = require("fs"),
                 path = require("path");
 
