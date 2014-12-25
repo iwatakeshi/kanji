@@ -162,7 +162,7 @@
                     }).filter(function(file) {
                         return fs.statSync(file).isFile();
                     }).forEach(function(file) {
-                        console.log(file);
+                        //console.log(file);
                         if (file.match(/locale/) || file.match(/grade/)) {
                             require(path.resolve(file));
                         }
