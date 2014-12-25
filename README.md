@@ -17,10 +17,12 @@ The benefits of using this:
 	* findByMeaning (available as a static method to narrow down results)
 	* findByOnyomi (note all on-yomi must be Katakana)
 	* findByKunYomi (note all kun-yomi must be Hiragana)
-* should work with node.js (currently working in browser)
+* works with node.js
 * locale support (search kanji in your locale)
 
 ###Usage
+
+In browser
 
 ```html
 	<script type="text/javascript" src="kanji.js"></script>
@@ -41,6 +43,15 @@ The benefits of using this:
 		*/
 	</script>
 
+```
+
+In node.js
+
+Note: This project is not yet available on npmjs.org.
+
+```js
+var kanji = require('kanji.js');//subject to change
+console.log(kanji().grades()); //return the entire dictionary
 ```
 
 ###Instructions

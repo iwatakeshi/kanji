@@ -135,7 +135,7 @@
                             if (locales[global.locale]) {
                                 if (locales[global.locale].grade[g]) {
                                     _.each(locales[global.locale].grade[g], function(kl) {
-                                          k.meaning = kl.meaning;
+                                        k.meaning = kl.meaning;
                                     });
                                 }
 
@@ -146,10 +146,43 @@
             });
         }
     }
+
+    function loadModules() {
+        if (hasModule) {
+            console.log('HERE');
+            var fs = require("fs"),
+                path = require("path");
+
+            var p = "./public/javascripts/"
+            fs.readdir(p, function(err, files) {
+                if (err) {
+                    throw err;
+                } else {
+                    files.map(function(file) {
+                        return path.join(p, file);
+                    }).filter(function(file) {
+                        return fs.statSync(file).isFile();
+                    }).forEach(function(file) {
+                        console.log(file);
+                        if (file.match(/locale/) || file.match(/grade/)) {
+                            require(path.resolve(file));
+                        }
+
+                        console.log("%s (%s)", file, path.extname(file));
+                    });
+                }
+
+
+            });
+        }
+    }
+
     /**
      * Kanji Constructor
      */
-    var Kanji = function() {};
+    var Kanji = function() {
+        loadModules();
+    };
 
     /**
      * Sets the grade level and returns the grade
@@ -158,7 +191,7 @@
      */
     Kanji.prototype.grade = function(grade) {
         if (typeof grade === Number) {
-            global.grade = grades[grade + 1];
+            global.grade = grades[grade - 1];
         }
 
         if (typeof grade === String) {
@@ -166,8 +199,12 @@
         }
 
         replaceMeaning();
-
-        return dictionary[global.grade];
+        if(global.grade !== '*'){
+            return dictionary[global.grade];
+        }else{
+            return new Error('Use grades() function instead.');
+        }
+        
     };
 
     /**
@@ -228,13 +265,29 @@
             });
 
         } else {
-            _.each(dictionary, function(g) {
-                _.each(g, function(k) {
-                    _.each(k.meaning, function(m) {
-                        if (m === meaning) {
-                            result.push(k);
-                        }
-                    });
+            _.each(dictionary, function(g, gvalue) {
+                _.each(gvalue, function(k) {
+
+                    if (locales[global.locale]) {
+                        _.each(locales[global.locale].grade, function(gl, glvalue) {
+                            _.each(glvalue, function(kl) {
+                                if (k.character === kl.character) {
+                                    _.each(kl.meaning, function(ml) {
+                                        if (ml === meaning) {
+                                            k.meaning = kl.meaning;
+                                            result.push(k);
+                                        }
+                                    })
+                                }
+                            });
+                        });
+                    } else {
+                        _.each(k.meaning, function(m) {
+                            if (m === meaning) {
+                                result.push(k);
+                            }
+                        });
+                    }
                 });
             });
         }
@@ -448,6 +501,7 @@
 
     // CommonJS module is defined
     if (hasModule) {
+        kanji.prototype = Kanji.prototype;
         module.exports = kanji;
     }
 

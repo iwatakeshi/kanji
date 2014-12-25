@@ -23,7 +23,7 @@
             romaji: "ichi",
             meaning: ["one"],
             onyomi: ["イチ", "イツ"],
-            kunyomi: ["ひと", "ひとつ"],
+            kunyomi: ["ひと", "ひと‐つ"],
             example: [{
                 ex: "一月のたんじょう日で、一つ年をとった。",
                 ruby: ["いちがつ", "び", "ひと", "とし"]
@@ -83,7 +83,7 @@
             character: "円",
             romaji: "en",
             meaning: ["round", "yen", "circle"],
-            onyomi: ["えん"],
+            onyomi: ["エン"],
             kunyomi: ["まる‐い"],
             example: [{
                 ex: "円いパンをやく。",
@@ -91,96 +91,161 @@
             }, {
                 ex: "コンパスで円をかく。",
                 ruby: ["えん"]
-            },{
+            }, {
                 ex: "はなしあって円満にかいけつしよう。",
-                ruby:["えんまん"]
-            },{
-                ex:"百円でアイスクリームを買いました。",
-                ruby:["ひゃく","か"]
-            },{
-                ex:"円高（＝日本のお金のかちがあがること）になる。",
-                ruby:["えんだか","にほん","かね"]
+                ruby: ["えんまん"]
+            }, {
+                ex: "百円でアイスクリームを買いました。",
+                ruby: ["ひゃく", "か"]
+            }, {
+                ex: "円高（＝日本のお金のかちがあがること）になる。",
+                ruby: ["えんだか", "にほん", "かね"]
             }]
 
         }, {
             character: "王",
             romaji: "ou",
-            meaning: ["king","monarch", "sovereign","potentate"],
-            onyomi: ["おう"],
+            meaning: ["king", "monarch", "sovereign", "potentate"],
+            onyomi: ["オウ"],
             kunyomi: [],
             example: [{
                 ex: "王さまは、みんなのことをかんがえていました。",
                 ruby: ["おう"]
-            },
-            {
-                ex:"かれは、Jリーグでとくてん王になった。",
-                ruby:["ジェー","おう"]
+            }, {
+                ex: "かれは、Jリーグでとくてん王になった。",
+                ruby: ["ジェー", "おう"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "音",
+            romaji: "oto",
+            meaning: ["sound", "noise", "note"],
+            onyomi: ["オン", "イン"],
+            kunyomi: ["おと", "ね"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "足音がきこえる。",
+                ruby: ["あしおと"]
+            }, {
+                ex: "おてらのかねの音がきこえる。",
+                ruby: ["ね"]
+            }, {
+                ex: "いえごの発音がとてもよい。",
+                ruby: ["はつおん"]
+            }, {
+                ex: "音信がとだえる。",
+                ruby: ["おんしん"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "下",
+            romaji: "shita",
+            meaning: ["under", "below"],
+            onyomi: ["カ", "ゲ"],
+            kunyomi: ["した", "しも", "もと", "さ‐げる", "さ‐がる", "くだーる", "くだ‐す", "くだ‐さる", "お‐ろす", "お‐りる"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "木の下にすわって休む。",
+                ruby: ["した", "やす"]
+            }, {
+                ex: "はしごから下りる。",
+                ruby: ["お"]
+            }, {
+                ex: "地下鉄にのりかえる。",
+                ruby: ["ちかてつ"]
+            }, {
+                ex: "年下のこといっしょにあそぶ。",
+                ruby: ["としした"]
+            }, {
+                ex: "川下にむかってながれる。",
+                ruby: ["かわしも"]
+            }, {
+                ex: "きおんがきゅうに下がる",
+                ruby: ["さ"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "火",
+            romaji: "hi",
+            meaning: ["fire", "flame", "light", "blaze"],
+            onyomi: ["カ"],
+            kunyomi: ["ひ", "ほ"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "まっかにもえる火。",
+                ruby: ["ひ"]
+            }, {
+                ex: "日本には、火山がおおい。",
+                ruby: ["ひほん", "かざん"]
+            }, {
+                ex: "火事にならないように、火の用心をしましょう。",
+                ruby: ["かじ", "ひ", "ようじん"]
+            }, {
+                ex: "きょうは、みんなで花火をします。",
+                ruby: ["はなび"]
+            }, {
+                ex: "たき火をしてやきいもをやく。",
+                ruby: ["び"]
+            }, {
+                ex: "火曜日におばさんがくる。",
+                ruby: ["かようび"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "花",
+            romaji: "hana",
+            meaning: ["flower", "blossom"],
+            onyomi: ["カ"],
+            kunyomi: ["はな"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "きれいな花を、花びんにさした。",
+                ruby: ["はな", "か"]
+            }, {
+                ex: "花だんに草花のたねをまいた。",
+                ruby: ["か", "くさばな"]
+            }, {
+                ex: "たんじょう日に花束をもらった。",
+                ruby: ["び", "はなたば"]
+            }, {
+                ex: "さらにうちあげ花火があがった。",
+                ruby: ["はなび"]
+            }, {
+                ex: "花よめさんが、とてもきれいです。",
+                ruby: ["はな"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "貝",
+            romaji: "kai",
+            meaning: ["shellfish", "shell"],
+            onyomi: [],
+            kunyomi: ["かい"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "はまべで、きれいな貝がらをひろった。",
+                ruby: ["かい"]
+            }, {
+                ex: "桜貝を糸でむすんで、ネックレスをつくろう。",
+                ruby: ["さくらがい", "いと"]
+            }, {
+                ex: "貝づかは、大むかしの人がたべたあとの貝がらをすてたところです。",
+                ruby: ["かい", "おお", "ひと", "かい"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "学",
+            romaji: "gaku",
+            meaning: ["learn", "study"],
+            onyomi: ["ガク"],
+            kunyomi: ["まな‐ぶ"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "兄は、大学で医学を学んでいる。",
+                ruby: ["あに", "だいがく", "いがく", "まな"]
+            }, {
+                ex: "しゃかいかの学習で、車の工場を見学した。",
+                ruby: ["がくしゅう", "くるま", "こうじょう", "けんがく"]
+            }, {
+                ex: "めざましい科学のぎじゅつのしんぽ。",
+                ruby: ["かがく"]
+            },{
+                ex: "小学校に入学する。",
+                ruby: ["しょうがっこう","にゅうがく"]
             }]
 
         }, {
