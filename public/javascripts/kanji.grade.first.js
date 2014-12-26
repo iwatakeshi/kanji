@@ -243,52 +243,76 @@
             }, {
                 ex: "めざましい科学のぎじゅつのしんぽ。",
                 ruby: ["かがく"]
-            },{
+            }, {
                 ex: "小学校に入学する。",
-                ruby: ["しょうがっこう","にゅうがく"]
+                ruby: ["しょうがっこう", "にゅうがく"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "気",
+            romaji: "ki",
+            meaning: ["spirit", "mood"],
+            onyomi: ["キ", "ケ"],
+            kunyomi: [],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "じてん車のタイヤに空気を入れる。",
+                ruby: ["しゃ","くうき"]
+            }, {
+                ex: "かぜがなおって元気になりました。",
+                ruby: ["げんき"]
+            }, {
+                ex: "いえを出てからわすれものに気がついた。",
+                ruby: ["で","き"]
+            }, {
+                ex: "うしろに、人の気配がする。",
+                ruby: ["ひと","けはい"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "九",
+            romaji: "kyū",
+            meaning: ["nine"],
+            onyomi: ["キュウ","ク"],
+            kunyomi: ["ここの","ここの‐つ"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "やきゅうは、一チーム九。",
+                ruby: ["いち","きゅう"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "休",
+            romaji: "kyū",
+            meaning: ["rest","holiday"],
+            onyomi: ["キュウ"],
+            kunyomi: ["やす‐む","やす‐まる","やす‐める"],
             example: [{
-                ex: "",
-                ruby: [""]
+                ex: "かぜで学校を休んだ。",
+                ruby: ["がっこう","やす"]
+            },{
+                ex: "体を休める。",
+                ruby: ["からだ","やす"]
+            },{
+                ex: "こんどの休日は、ゆうえんちにいきます。",
+                ruby: ["きゅうじつ"]
+            },{
+                ex: "五月の連休に、かぞくでりょこうをした。",
+                ruby: ["ごがつ","れんきゅう"]
+            },{
+                ex: "本日はおみせを休業いたします。",
+                ruby: ["ほんじつ","きゅうぎょう"]
+            },{
+                ex: "ざっしが、休刊になりました。",
+                ruby: ["きゅうかん"]
             }]
 
         }, {
-            character: "",
-            romaji: "",
-            meaning: [""],
-            onyomi: [""],
-            kunyomi: [""],
+            character: "玉",
+            romaji: "tama",
+            meaning: ["ball","sphere","bullet"],
+            onyomi: ["ギョク"],
+            kunyomi: ["たま"],
             example: [{
-                ex: "",
+                ex: "宝玉（＝たからとすほう玉）がついた、王さまのかんむり。",
                 ruby: [""]
             }]
 
