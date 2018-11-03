@@ -1,6 +1,8 @@
 kanji
 =====
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/iwatakeshi/kanji.svg)](https://greenkeeper.io/)
+
 A Kanji dictionary for the web.
 
 The available grades are from first through sixth.
